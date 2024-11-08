@@ -38,7 +38,12 @@ let rec length (xs: 'a list) : int =
 
 (* Bonus: Do it with tail recursion *)
 
-
+let length_opt (xs : 'a list) : int = 
+    let rec length_opt' (xs: 'a list) (acc: int) : int = 
+        match xs with
+    | [ ] -> acc
+    | head :: tail -> length_opt' tail  (acc + 1)
+    in length_opt' xs 0
 
 (* problem 5*)
 (* Reverse a list *)
