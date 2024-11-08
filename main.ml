@@ -1,4 +1,4 @@
-let () = 
+let () =
     print_endline "Hello, World!"
 
 (* problem 1 *)
@@ -27,4 +27,25 @@ let rec at (xs: 'a list) (n: int) : 'a option =
     | x :: _ when n == 0 -> Some x
     | _ :: rest when n > 0 -> at rest (n-1)
     | _ -> None
+
+(* problem 4*)
+(* length of a list *)
+
+let rec length (xs: 'a list) : int = 
+    match xs with
+    | [ ] -> 0
+    | head :: tail -> (length (tail)) + 1
+
+(* Bonus: Do it with tail recursion *)
+
+
+
+(* problem 5*)
+(* Reverse a list *)
+
+let rec reverse (xs : 'a list) : 'a list = 
+    match xs with
+    | [ ] -> [ ]
+    | [ x ] -> [ x ]
+    | head :: tail -> reverse tail @ [head]
 
