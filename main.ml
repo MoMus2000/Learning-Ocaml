@@ -54,3 +54,14 @@ let rec reverse (xs : 'a list) : 'a list =
     | [ x ] -> [ x ]
     | head :: tail -> reverse tail @ [head]
 
+(* problem 6*)
+(* Find out whether a list is a palindrome.*)
+
+let is_palindrome (xs: 'a list) : bool =
+    let rec is_palindrome' (xs: 'a list) (ys: 'a list) : bool = 
+        match (xs, ys) with
+        | ([], []) -> true
+        | (x:: xs', y::ys') when x = y -> is_palindrome' xs' ys'
+        | _  -> false
+        in is_palindrome' xs (reverse xs)
+
