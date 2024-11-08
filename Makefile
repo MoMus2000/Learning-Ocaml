@@ -8,3 +8,10 @@ $(TARGET): main.ml
 
 clean:
 	rm -f $(TARGET) *.cmo *.cmi
+
+compile:
+	ocamlopt -o $(TARGET) main.ml
+
+wash:
+	rm -f $(TARGET) *.cmx *.o
+

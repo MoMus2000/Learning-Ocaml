@@ -1,5 +1,5 @@
 let () =
-    print_endline "Hello, World!"
+    print_endline "https://ocaml.org/exercises?difficulty_level=beginner"
 
 (* problem 1 *)
 (* Write a function last : 'a list -> 'a 
@@ -64,4 +64,9 @@ let is_palindrome (xs: 'a list) : bool =
         | (x:: xs', y::ys') when x = y -> is_palindrome' xs' ys'
         | _  -> false
         in is_palindrome' xs (reverse xs)
+
+(* problem 7*)
+(* Run-Length Encoding *)
+let run_length_encoding xs acc current : (int * string) list =
+    assert false
 
