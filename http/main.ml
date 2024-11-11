@@ -1,6 +1,7 @@
 open Lwt
 open Cohttp
 open Cohttp_lwt_unix
+open Soup
 
 type request = {
   status_code: int;
@@ -16,21 +17,28 @@ let send_http_request url = Client.get (
         let response = {status_code = status_code; body = _body} in
         Lwt.return response
 
+let parse_html body = 
+  let parsed = parse body in
+  parsed
 
 let print_response response name =
   Printf.printf "Output From %s: %s with code %d \n" name (String.sub response.body 0 10) 
-    response.status_code
+  response.status_code;
+  let soup = parse_html (response.body)
+  in
+    soup $ "title" |> R.leaf_text |> print_endline;
+    soup $$ "a[href]" |> iter (fun a -> print_endline (R.attribute "href" a));
+  ()
+
+
 
 let () = 
-  let reponses = List.init 10 (fun _ -> Lwt_main.run (send_http_request
-  "https://www.mmuhammad.net/"))
+  Lwt_main.run (
+      send_http_request "https://www.mmuhammad.net/" >>= fun response ->
+      print_response response "MMuhammad" ;
+      Lwt.return ()
+  );
 
-  in
-
-  List.iteri (fun i response ->
-    Printf.printf "Response %d:\n" (i + 1);
-    print_response response "mmuhammad"
-  ) reponses;
 
   ()
 
