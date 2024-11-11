@@ -1,5 +1,5 @@
 let () =
-    print_endline "https://ocaml.org/exercises?difficulty_level=beginner"
+  print_endline "https://ocaml.org/exercises?difficulty_level=beginner"
 
 (* problem 1 *)
 (* Write a function last : 'a list -> 'a 
@@ -39,8 +39,7 @@ let rec length (xs: 'a list) : int =
 (* Bonus: Do it with tail recursion *)
 
 let length_opt (xs : 'a list) : int = 
-    let rec length_opt' (xs: 'a list) (acc: int) : int = 
-        match xs with
+    let rec length_opt' (xs: 'a list) (acc: int) : int = match xs with
     | [ ] -> acc
     | head :: tail -> length_opt' tail  (acc + 1)
     in length_opt' xs 0
@@ -55,8 +54,6 @@ let rec reverse (xs : 'a list) : 'a list =
     | head :: tail -> reverse tail @ [head]
 
 (* problem 6*)
-(* Find out whether a list is a palindrome.*)
-
 let is_palindrome (xs: 'a list) : bool =
     let rec is_palindrome' (xs: 'a list) (ys: 'a list) : bool = 
         match (xs, ys) with
@@ -65,8 +62,5 @@ let is_palindrome (xs: 'a list) : bool =
         | _  -> false
         in is_palindrome' xs (reverse xs)
 
-(* problem 7*)
-(* Run-Length Encoding *)
-let run_length_encoding xs acc current : (int * string) list =
-    assert false
+
 
