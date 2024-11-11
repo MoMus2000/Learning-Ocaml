@@ -21,24 +21,43 @@ let parse_html body =
   let parsed = parse body in
   parsed
 
+let normalize_whitespace text =
+  Str.global_replace (Str.regexp "[ \t\n\r]+") " " (String.trim text)
+
 let print_response response name =
   Printf.printf "Output From %s: %s with code %d \n" name (String.sub response.body 0 10) 
   response.status_code;
   let soup = parse_html (response.body)
   in
+
     soup $ "title" |> R.leaf_text |> print_endline;
     soup $$ "a[href]" |> iter (fun a -> print_endline (R.attribute "href" a));
+
+    Printf.printf "\n";
+    Printf.printf "Printing the paragraphs ..\n";
+    Printf.printf "\n";
+    soup $$ "p" |> iter (fun a -> match Soup.leaf_text a with
+      | Some text -> print_endline (normalize_whitespace text)
+      | None -> ()
+    );
+
+    Printf.printf "\n";
+    Printf.printf "Printing the Div ..\n";
+    Printf.printf "\n";
+    soup $$ "div" |> iter (fun a -> match Soup.leaf_text a with
+      | Some text -> print_endline (normalize_whitespace text)
+      | None -> ()
+    );
+
+
   ()
-
-
 
 let () = 
   Lwt_main.run (
       send_http_request "https://www.mmuhammad.net/" >>= fun response ->
-      print_response response "MMuhammad" ;
+      print_response response "MMuhammad";
       Lwt.return ()
   );
-
 
   ()
 

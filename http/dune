@@ -1,4 +1,4 @@
 (executable
  (name main)
- (libraries cohttp-lwt-unix lwt lambdasoup))
+ (libraries cohttp-lwt-unix lwt lambdasoup Str))
 
