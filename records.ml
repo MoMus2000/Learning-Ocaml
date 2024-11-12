@@ -11,8 +11,8 @@ let ruth = {
 } 
 
 type point = float * float
-
 let p : point = (5.0, 3.5)
+
 
 let x = match not true with
     | true  -> "nope"
@@ -47,10 +47,10 @@ let rec sum_of_list lst = match lst with
 let rec len lst = match lst with
     | [    ] -> 0
     | h :: t -> 1 + len t
-
 let lst = [1; 2; 3; 4;]
 
 let result = sum_of_list lst
 
 let len_result = len lst
+
 

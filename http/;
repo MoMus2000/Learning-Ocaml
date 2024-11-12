@@ -16,7 +16,7 @@ type response = {
 }
 
 let send_http_request url = Client.get (
-    construct_url (url)) >>= fun (resp, body) ->
+  Uri.of_string url ) >>= fun (resp, body) ->
     let status_code = Response.status resp |> 
     Code.code_of_status in 
       body |> Cohttp_lwt.Body.to_string >>= 
@@ -63,6 +63,7 @@ let print_response response name =
       | Some text -> print_endline (normalize_whitespace text)
       | None -> ()
     );
+
 
   ()
 
